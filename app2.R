@@ -94,6 +94,7 @@ ui <- fluidPage(
           tags$link(rel = "stylesheet", type = "text/css", href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"),
           tags$link(rel = "stylesheet", type = "text/css", href = "https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/css/AdminLTE.min.css"),
           tags$link(rel = "stylesheet", type = "text/css", href = "https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.4.18/css/skins/skin-blue.min.css"),
+          tags$link(rel = "stylesheet", type = "text/css", href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"),
           tags$script(
                HTML(
                     '
@@ -192,110 +193,219 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                       class = "aside open",
                                       tags$nav(
                                            class = "aside__nav",
-                                           tags$ul(
-                                                class = "aside__items",
-                                                `data-spollers` = "", `data-one-spoller` = "",
-                                                tags$li(class = "aside__item summary-metrics-item",
-                                                        tags$button(
-                                                             type = "button", class = "aside__nav-btn _spoller-active",
-                                                             `data-spoller` = "", 
-                                                             "Summary metrics",
-                                                             href = "#summary-metrics",
-                                                             `data-toggle` = "tab"
-                                                        ),
-                                                        tags$ul(class = "aside__submenu",
-                                                                tags$li(
-                                                                     tags$ul(
-                                                                          tags$button(
-                                                                               type = "button",
-                                                                               "summary metrics yoy", tags$i("→"),
-                                                                               `data-toggle` = "tab", href = "#summary-metrics-yoy",
-                                                                               id = "btn-summary-metrics-yoy",
-                                                                               style = "color: orange;"
-                                                                          )
-                                                                     )
-                                                                )
-                                                        )
-                                                ),
-                                                tags$li(
-                                                     class = "aside__item",
-                                                     tags$button(
-                                                          type = "button", class = "aside__nav-btn",
-                                                          `data-toggle` = "tab",
-                                                          href = "#Cohort-Analysis",
-                                                          `data-spoller` = "", "Cohort Analysis",
-                                                          id = "btn-Cohort-Analysis"
-                                                     ),
-                                                     
-                                                     tags$ul(
-                                                          class = "aside__submenu", hidden = "",
-                                                          tags$li(tags$h4("Cohort summary")),
-                                                          tags$li( 
-                                                               tags$ul(
-                                                                    tags$button(
-                                                                         type = "button",
-                                                                         href = "#category-economics-summary",
-                                                                         `data-toggle` = "tab",
-                                                                         
-                                                                         "Category Economics Summary", tags$i("→"),
-                                                                         id = "btn-category-economics-summary"
-                                                                    )
-                                                               )
-                                                          ),
-                                                          tags$li( 
-                                                               tags$ul(
-                                                                    tags$button(
-                                                                         type = "button",class = "cohort-financial-contribution", 
-                                                                         href = "#cohort-financial-contribution",
-                                                                         `data-toggle` = "tab",
-                                                                         
-                                                                         "Cohort Financial Contribution", tags$i("→"),
-                                                                         id = "btn-cohort-financial-contribution"
-                                                                    )
-                                                               )
-                                                          ),
-                                                          tags$li(
-                                                               tags$ul(
-                                                                    tags$button(
-                                                                         type = "button",
-                                                                         href = "#repeat-revenue-trend",
-                                                                         `data-toggle` = "tab",
-                                                                         
-                                                                         "Repeat Revenue trend", tags$i("→"),
-                                                                         id = "btn-repeat-revenue-trend"
-                                                                    )
-                                                               )
-                                                          ),
-                                                          tags$li(tags$h4("Customer Behavior")),
-                                                          tags$li( 
-                                                               tags$ul(
-                                                                    tags$button(
-                                                                         type = "button", 
-                                                                         href = "#Repeat-Frequency",
-                                                                         `data-toggle` = "tab",
-                                                                         "Repeat Frequency", tags$i("→"),
-                                                                         id = "btn-Repeat-Frequency"
-                                                                    )
-                                                               )
-                                                          )
-                                                     )
-                                                ),
-                                                tags$li(
-                                                     tags$ul(
-                                                          class = "aside__item",
-                                                          tags$button(
-                                                               type = "button",class = "aside__nav-btn geografy-item",
-                                                               `data-spoller` = "","Geography",
-                                                               href = "#Geography",
-                                                               `data-toggle` = "tab",
-                                                               id = "btn-Geography"
-                                                          ),
-                                                          tags$ul(class = "aside__submenu", hidden = ""
-                                                          )
-                                                     )
-                                                )
-                                                
-                                           ),
+                                           
+                    #############################
+                    # Include CSS styles
+                    tags$style(HTML("
+    /* Custom CSS for GA Sidebar */
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar-menu > li {
+      position: relative;
+    }
+
+    .sidebar-link {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .sidebar-link:hover {
+      background-color: #FFA622;
+      border-radius: 20px;
+    }
+
+    .sidebar-link .arrow {
+     /* float: left;  */
+      margin-right: 5px;
+    }
+
+    .sidebar-link i.fa {
+      margin-right: 10px;
+    }
+
+    .treeview-menu {
+      display: none;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .treeview-menu li {
+      position: relative;
+      padding-left: 20px; /* Adjust the value as per your preference */
+    }
+
+    .treeview-menu a {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .treeview-menu a:hover {
+      background-color: #FFA622;
+      border-radius: 20px;
+    }
+  ")),
+                    
+                    # Include Font Awesome library
+                    tags$head(tags$link(rel = "stylesheet", href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")),
+                    
+                    # Include JavaScript code
+                    tags$script(HTML("
+    // Custom JavaScript for GA Sidebar
+    $(document).ready(function() {
+      // Handle sidebar toggling
+      $('.treeview > a').click(function(e) {
+        e.preventDefault();
+        var submenu = $(this).siblings('.treeview-menu');
+        if (submenu.is(':visible')) {
+          submenu.slideUp();
+          $(this).find('.arrow').removeClass('fa-angle-down').addClass('fa-angle-right');
+        } else {
+          submenu.slideDown();
+          $(this).find('.arrow').removeClass('fa-angle-right').addClass('fa-angle-down');
+        }
+      });
+    });
+  ")),
+                    
+                    
+                    
+                    ##################
+                    
+                    
+                    
+                    tags$ul(
+                         `data-spollers` = "", `data-one-spoller` = "",
+                         class = "sidebar-menu aside__items",
+                         tags$li(
+                              class = "aside__item summary-metrics-item treeview",
+
+                              tags$a(
+                                   type = "button",
+                                   href = "#summary-metrics",
+                                   class = "sidebar-link",
+                                   tags$i(class = "fas fa-angle-right arrow"),
+                                   tags$i(class = "fas fa-chart-line"),
+                                   class = "aside__nav-btn _spoller-active",
+                                   `data-spoller` = "",
+                                   #id = "btn-summary-metrics",
+                                   "Summary metrics",
+                                   `data-toggle` = "tab"
+                              ),
+                              tags$ul(
+                                   class = "treeview-menu aside__submenu",
+                                   tags$li(tags$a(
+                                        type = "button",
+                                        href = "#summary-metrics-yoy", 
+                                        #id = "btn-summary-metrics-yoy",
+                                        `data-toggle` = "tab",
+                                        class = "sidebar-link",
+                                        "Summary metrics yoy"
+                                   ))
+                              )
+                         ),
+                         tags$li(
+                              class = "treeview",
+                              tags$a(
+                                   type = "button",
+                                   class = "sidebar-link",
+                                   tags$i(class = "fas fa-angle-right arrow"),
+                                   tags$i(class = "fas fa-chart-pie"),
+                                   "Cohort Analysis",
+                                   `data-toggle` = "tab", `data-spoller` = "",
+                                   id = "btn-Cohort-Analysis"
+                              ),
+                              tags$ul(
+                                   class = "treeview-menu",
+                                   tags$li(
+                                        class = "treeview",
+                                        tags$a(
+                                             type = "button",
+                                             #href = "#",
+                                             class = "sidebar-link",
+                                             tags$i(class = "fas fa-angle-right arrow"),
+                                             tags$i(class = "fas fa-users"),
+                                             "Cohort summary",
+                                             `data-toggle` = "tab", `data-spoller` = ""
+                                             
+                                        ),
+                                        tags$ul(
+                                             class = "treeview-menu",
+                                             tags$li(tags$a(
+                                                  href = "#category-economics-summary",
+                                                  `data-toggle` = "tab",
+                                                  class = "sidebar-link",
+                                                  "Category Economics Summary",
+                                                  id = "btn-category-economics-summary"
+                                             )),
+                                             tags$li(tags$a(
+                                                  href = "#cohort-financial-contribution",
+                                                  `data-toggle` = "tab",
+                                                  class = "sidebar-link",
+                                                  "Cohort Financial Contribution",
+                                                  id = "btn-cohort-financial-contribution"
+                                             )),
+                                             tags$li(tags$a(
+                                                  href = "#repeat-revenue-trend",
+                                                  `data-toggle` = "tab",
+                                                  class = "sidebar-link",
+                                                  "Repeat Revenue Trend",
+                                                  id = "btn-repeat-revenue-trend"
+                                             ))
+                                        )
+                                   ),
+                                   tags$li(
+                                        class = "treeview",
+                                        tags$a(
+                                             #href = "#",
+                                             type = "button",
+                                             class = "sidebar-link aside__nav-btn",
+                                             tags$i(class = "fas fa-angle-right arrow"),
+                                             tags$i(class = "fas fa-users"),
+                                             `data-toggle` = "tab", `data-spoller` = "",
+                                             "Customer Behavior", 
+                                        ),
+                                        tags$ul(
+                                             class = "treeview-menu",
+                                             tags$li(tags$a(
+                                                  href = "#Repeat-Frequency",
+                                                  `data-toggle` = "tab",
+                                                  class = "sidebar-link",
+                                                  "Repeat Frequency",
+                                                  id = "btn-Repeat-Frequency"
+                                                  
+                                             ))
+                                        )
+                                   )
+                              )
+                         ),
+                         tags$li(
+                              class = "sidebar-link aside__item",
+                              #class = "aside__nav-btn geografy-item",
+                              tags$a(
+                                   href = "#Geography",
+                                   type = "button",
+                                   `data-toggle` = "tab",
+                                   id = "btn-Geography",
+                                   `data-spoller` = "",
+                                   #class = "sidebar-link",
+                                   tags$i(class = "fas fa-globe"),
+                                   "Geography Data"
+                              )
+                         )
+                    ),
+                                           
+                                           
+                                           ###########
+                                           
+                                           
                                            br(),br(),
                                            tags$div(
                                                 class = "aside-buttons",
@@ -487,11 +597,11 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                            )
                                       )
                                  ),
-                                 tags$div(
-                                      class = "tab-pane",
-                                      id = "repeat-revenue-trend",
-                                      "repeat revenue trend"
-                                 ),
+                                # tags$div(
+                                #      class = "tab-pane",
+                                #      id = "repeat-revenue-trend",
+                                #      "repeat revenue trend"
+                                # ),
                                  tags$div(
                                       class = "tab-pane",
                                       id = "Geography",
