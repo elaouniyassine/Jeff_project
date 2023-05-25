@@ -282,11 +282,10 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                     
                     
                     tags$ul(
-                         `data-spollers` = "", `data-one-spoller` = "",
                          class = "sidebar-menu aside__items",
+                         `data-spollers` = "", `data-one-spoller` = "",
                          tags$li(
                               class = "aside__item summary-metrics-item treeview",
-
                               tags$a(
                                    type = "button",
                                    href = "#summary-metrics",
@@ -301,14 +300,16 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                               ),
                               tags$ul(
                                    class = "treeview-menu aside__submenu",
-                                   tags$li(tags$a(
-                                        type = "button",
-                                        href = "#summary-metrics-yoy", 
-                                        #id = "btn-summary-metrics-yoy",
-                                        `data-toggle` = "tab",
-                                        class = "sidebar-link",
-                                        "Summary metrics yoy"
-                                   ))
+                                   tags$li(
+                                        tags$a(
+                                             type = "button",
+                                             href = "#summary-metrics-yoy", 
+                                             #id = "btn-summary-metrics-yoy",
+                                             `data-toggle` = "tab",
+                                             class = "sidebar-link",
+                                             "Summary metrics yoy"
+                                        )
+                                   )
                               )
                          ),
                          tags$li(
@@ -334,7 +335,6 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                              tags$i(class = "fas fa-users"),
                                              "Cohort summary",
                                              `data-toggle` = "tab", `data-spoller` = ""
-                                             
                                         ),
                                         tags$ul(
                                              class = "treeview-menu",
@@ -370,7 +370,7 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                              tags$i(class = "fas fa-angle-right arrow"),
                                              tags$i(class = "fas fa-users"),
                                              `data-toggle` = "tab", `data-spoller` = "",
-                                             "Customer Behavior", 
+                                             "Customer Behavior" 
                                         ),
                                         tags$ul(
                                              class = "treeview-menu",
@@ -380,7 +380,6 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                                   class = "sidebar-link",
                                                   "Repeat Frequency",
                                                   id = "btn-Repeat-Frequency"
-                                                  
                                              ))
                                         )
                                    )
@@ -400,7 +399,8 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                    "Geography Data"
                               )
                          )
-                    ),
+                    )
+                    ,
                                            
                                            
                                            ###########
