@@ -13,8 +13,16 @@ library(dplyr)
 library(shinycssloaders)
 library(shinydashboard)
 library(shinyjs)
+library(tippy)
 
 load("DashboardData.RData")
+
+# See the ?tippy documentation to learn how to customize tooltips
+with_tooltip <- function(value, tooltip, ...) {
+  div(style = "text-decoration: underline; text-decoration-style: dotted;
+      position: top; cursor: help; theme: light;",
+      tippy(value, tooltip, theme = "light" , ...))
+}
 
 highchart_theme <- hc_theme(
   colors = c("#ffba08", "#faa307", "#f48c06", "#e85d04","#dc2f02","#d00000",  "#9d0208",  "#6a040f", "#370617", "#000"),
@@ -227,14 +235,15 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                                                                      tags$div(class = "dropdown-content",
                                                                                               tags$ul(class = "sublist-dropdown",
                                                                                                       tags$li(class = "subitem-dropdown",
+                                                                                                              tags$a(href = "#category-economics-summary", `data-toggle` = "tab", class = "link", "Category Economics Summary")
+                                                                                                      ),
+                                                                                                      tags$li(class = "subitem-dropdown",
                                                                                                               tags$a(href = "#cohort-financial-contribution",`data-toggle` = "tab", class = "link", "Cohort Financial Contribution")
                                                                                                       ),
                                                                                                       tags$li(class = "subitem-dropdown",
                                                                                                               tags$a(href = "#repeat-revenue-trend", `data-toggle` = "tab", class = "link", "Repeat Revenue Trend")
-                                                                                                      ),
-                                                                                                      tags$li(class = "subitem-dropdown",
-                                                                                                              tags$a(href = "#Repeat-Frequency", `data-toggle` = "tab", class = "link", "Repeat Frequency")
                                                                                                       )
+                                                                                                      
                                                                                               )
                                                                                      )
                                                                              ),
@@ -245,12 +254,12 @@ $(document).ready(function() { document.body.style.zoom = zoomLevel;});
                                                                                                                 tags$path(d = "M400-280v-400l200 200-200 200Z")
                                                                                                        )
                                                                                               ),
-                                                                                              tags$span(class = "item-text", "Category Customer Behavior")
+                                                                                              tags$span(class = "item-text", "Customer Behavior")
                                                                                      ),
                                                                                      tags$div(class = "dropdown-content",
                                                                                               tags$ul(class = "sublist-dropdown",
                                                                                                       tags$li(class = "subitem-dropdown",
-                                                                                                              tags$a(href = "#category-economics-summary", `data-toggle` = "tab",class = "link", "Category Economics Summary")
+                                                                                                              tags$a(href = "#Repeat-Frequency", `data-toggle` = "tab",class = "link", "Repeat Frequency")
                                                                                                       )
                                                                                               )
                                                                                      )
@@ -729,14 +738,14 @@ server <- function(input, output) {
       d,
       defaultPageSize = 25,
       columns = list(
-        Customers = colDef(format = colFormat(separators = TRUE)),
-        `AOV First Order` = colDef(format = colFormat(prefix = "$", separators = TRUE, digits = 0)),
-        `LTV 12 Month` = colDef(format = colFormat(prefix = "$", separators = TRUE, digits = 0)),
-        `Cumulative LTV` = colDef(format = colFormat(prefix = "$", separators = TRUE, digits = 0)),
-        `Order Repeat Rate 12 Month` = colDef(format = colFormat(percent = TRUE, digits = 1)),
-        `Order Repeat Rate` = colDef(format = colFormat(percent = TRUE, digits = 1)),
-        `Customer Repeat Rate 12 Month` = colDef(format = colFormat(percent = TRUE, digits = 1)),
-        `Customer Repeat Rate` = colDef(format = colFormat(percent = TRUE, digits = 1))
+        Customers = colDef(format = colFormat(separators = TRUE), header = with_tooltip("Customers", "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start")),
+        `AOV First Order` = colDef(format = colFormat(prefix = "$", separators = TRUE, digits = 0), header = with_tooltip("AOV First Order",  "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start")),
+        `LTV 12 Month` = colDef(format = colFormat(prefix = "$", separators = TRUE, digits = 0), header = with_tooltip("LTV 12 Month",  "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start")),
+        `Cumulative LTV` = colDef(format = colFormat(prefix = "$", separators = TRUE, digits = 0), header = with_tooltip("Cumulative LTV",  "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start")),
+        `Order Repeat Rate 12 Month` = colDef(format = colFormat(percent = TRUE, digits = 1), header = with_tooltip("Order Repeat Rate 12 Month",  "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start")),
+        `Order Repeat Rate` = colDef(format = colFormat(percent = TRUE, digits = 1), header = with_tooltip("Order Repeat Rate",  "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start")),
+        `Customer Repeat Rate 12 Month` = colDef(format = colFormat(percent = TRUE, digits = 1), header = with_tooltip("Customer Repeat Rate 12 Month",  "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start")),
+        `Customer Repeat Rate` = colDef(format = colFormat(percent = TRUE, digits = 1), header = with_tooltip("Customer Repeat Rate",  "<span style='font-size:15px;'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam molestie.<span>", allowHTML = TRUE, placement ="right-start"))
       ),
       bordered = FALSE,
       highlight = T,
